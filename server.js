@@ -396,7 +396,7 @@ io.on('connection', (socket) => {
 });
 
 // ── Start ────────────────────────────────────────────────────────────────
-const PORT = process.env.PORT || 3100;
+const PORT = process.env.PORT || 3000;
 db.init().then(() => {
   server.listen(PORT, '0.0.0.0', () => {
     console.log(`NumLock 서버 실행 중: http://localhost:${PORT}`);

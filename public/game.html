@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>NumLock · 게임</title>
+  <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+
+  <div id="rotate-prompt">
+    <div class="ic">📱</div>
+    <div class="tx1">화면을 가로로 돌려주세요</div>
+    <div class="tx2">NumLock 게임 화면은 가로 모드에서 플레이해요</div>
+  </div>
+
+  <div id="game-root">
+    <div id="admin-controls" style="display:none">
+      <div class="icon-btn" id="btn-pause">❚❚</div>
+      <div class="icon-btn" id="btn-admin-stop">✕</div>
+    </div>
+
+    <div class="game-layout">
+      <div class="gl-header">
+        <span class="tx" id="turn-text">-</span>
+        <div class="timer-mini" id="timer-mini" style="display:none">10</div>
+        <span class="combo-hint" id="combo-hint" style="display:none"></span>
+        <div class="gl-dice" id="dice-row">
+          <div class="die white" data-slot="w1">?</div><div class="die white" data-slot="w2">?</div>
+          <div class="die color r" data-slot="r">?</div><div class="die color y" data-slot="y">?</div>
+          <div class="die color g" data-slot="g">?</div><div class="die color b" data-slot="b">?</div>
+        </div>
+      </div>
+
+      <div class="board-grid" id="board-grid"></div>
+
+      <div class="action-bar" id="action-bar">
+        <div class="btn roll" id="btn-roll" style="display:none">🎲 주사위 굴리기</div>
+        <div class="btn pass" id="btn-pass-common" style="display:none">패스</div>
+        <div class="btn pass" id="btn-pass-extra" style="display:none">추가 행동 패스</div>
+      </div>
+    </div>
+
+    <div class="overlay-abs" id="roll-overlay">
+      <div class="roll-focus">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div class="roll-avatar" id="roll-avatar">🎲</div>
+          <div>
+            <div class="roll-name" id="roll-name">-</div>
+            <div class="roll-sub">주사위를 굴리는 중...</div>
+          </div>
+        </div>
+        <div class="roll-dice">
+          <div class="die white">?</div><div class="die white">?</div>
+          <div class="die color r">?</div><div class="die color y">?</div><div class="die color g">?</div><div class="die color b">?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay-abs" id="results-overlay">
+      <div class="results-land">
+        <div class="results-winner"><span class="trophy">🏆</span><span class="tx" id="results-winner-text"></span></div>
+        <div class="results-list" id="results-list"></div>
+        <div class="results-actions">
+          <div class="btn primary" id="btn-play-again">한 판 더!</div>
+          <div class="btn ghost" id="btn-go-main">메인으로</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay-abs" id="trans-overlay">
+      <div class="tx">준비 중<span>.</span><span>.</span><span>.</span></div>
+    </div>
+
+    <div class="overlay-abs" id="pause-overlay">
+      <div>
+        <div class="pause-icon">❚❚</div>
+        <div class="pause-title">일시정지 중</div>
+        <div class="pause-desc">게임이 멈춰있어요. 준비되면 재개를 눌러주세요.</div>
+        <button class="btn-resume" id="btn-resume">▶ 재개</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>NumLock</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 로그인 -->
+  <div id="screen-login" class="screen active">
+    <div class="dice-row"><i class="r"></i><i class="y"></i><i class="g"></i><i class="b"></i></div>
+    <div class="logo">NUM<span>LOCK</span></div>
+    <div style="width:100%;max-width:280px;display:flex;flex-direction:column;gap:12px">
+      <input id="input-usercode" class="field-input" type="text" placeholder="코드 입력" autocomplete="off">
+      <button id="btn-login" class="btn-neon">입장하기</button>
+      <div id="login-error" class="err-msg"></div>
+    </div>
+  </div>
+
+  <!-- 메인 -->
+  <div id="screen-main" class="screen">
+    <div class="profile-chip" id="btn-open-settings">
+      <div class="profile-av" id="main-avatar">🎲</div>
+      <div>
+        <div class="profile-name" id="main-username"></div>
+        <div class="profile-pt" id="main-points"></div>
+      </div>
+    </div>
+
+    <div class="main-mark">
+      <div class="dice-row sm"><i class="r"></i><i class="y"></i><i class="g"></i><i class="b"></i></div>
+      <div class="logo" style="font-size:22px">NUM<span>LOCK</span></div>
+    </div>
+
+    <div class="mode-card primary" id="btn-single">
+      <div class="mode-ic">🎲</div>
+      <div class="mode-body">
+        <div class="mode-title">싱글모드</div>
+        <div class="mode-sub">AI 3명과 바로 시작</div>
+      </div>
+    </div>
+
+    <div class="mode-card disabled">
+      <div class="mode-badge">준비중</div>
+      <div class="mode-ic" style="opacity:.6">👥</div>
+      <div class="mode-body">
+        <div class="mode-title" style="color:#aab0c8">멀티모드</div>
+        <div class="mode-sub">곧 만나요</div>
+      </div>
+    </div>
+
+    <div class="sub-menu">
+      <div class="sub-item" id="btn-open-settings2"><span class="ic">⚙️</span><span class="lb">설정</span></div>
+      <div class="sub-item" id="btn-open-ranking"><span class="ic">🏆</span><span class="lb">랭킹</span></div>
+      <div class="sub-item" id="btn-open-help"><span class="ic">❓</span><span class="lb">도움말</span></div>
+    </div>
+    <div id="main-error"></div>
+  </div>
+
+  <!-- 설정 -->
+  <div id="screen-settings" class="screen">
+    <div class="sub-layout" style="display:flex;flex-direction:column;height:100%">
+      <div class="sub-header">
+        <div class="sub-back" data-back="screen-main">←</div>
+        <div class="sub-title">설정</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;margin-top:16px">
+        <div class="settings-profile">
+          <div class="settings-av" id="settings-avatar-big">🎲</div>
+          <div>
+            <div class="settings-name" id="settings-username"></div>
+            <div class="settings-role">캐릭터</div>
+          </div>
+        </div>
+
+        <div class="avatar-grid" id="avatar-grid"></div>
+
+        <hr class="divider">
+
+        <div class="toggle-row">
+          <div>
+            <div class="t-label">접속중 표시</div>
+            <div class="t-sub">끄면 다른 사람 접속 상태도 안 보여요</div>
+          </div>
+          <div class="toggle" id="toggle-show-online"></div>
+        </div>
+
+        <div class="stat-grid2">
+          <div class="stat-card2">
+            <span class="ic">🕹️</span><span class="lb">싱글 포인트</span>
+            <span class="val" id="settings-single-points"></span>
+            <span class="charge-btn" id="btn-charge-single">충전</span>
+          </div>
+          <div class="stat-card2">
+            <span class="ic">👥</span><span class="lb">멀티 포인트</span>
+            <span class="val" id="settings-multi-points">0P</span>
+          </div>
+        </div>
+        <div id="settings-msg" class="err-msg"></div>
+
+        <div id="admin-area">
+          <div class="btn-outline" id="btn-admin-mode">관리자 모드</div>
+        </div>
+        <div class="btn-danger" id="btn-logout">로그아웃</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 도움말 -->
+  <div id="screen-help" class="screen">
+    <div class="sub-layout" style="display:flex;flex-direction:column;height:100%">
+      <div class="sub-header">
+        <div class="sub-back" data-back="screen-main">←</div>
+        <div class="sub-title">도움말</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:16px;overflow-y:auto">
+        <div class="help-intro">점수판에 숫자를 체크하여 가장 높은 점수를 얻으면 승리합니다.</div>
+
+        <div class="help-rows">
+          <div class="help-row"><span class="help-dot" style="color:var(--r);background:var(--r)"></span><span class="tx"><b>빨강·노랑</b> — 2 → 12 순서로 체크</span></div>
+          <div class="help-row"><span class="help-dot" style="color:var(--g);background:var(--g)"></span><span class="tx"><b>초록·파랑</b> — 12 → 2 순서로 체크</span></div>
+        </div>
+
+        <div>
+          <div class="help-step"><span class="n">1</span><span class="tx">내 차례엔 주사위 6개(흰2+색4) 모두 굴리기</span></div>
+          <div class="help-step"><span class="n">2</span><span class="tx">흰 주사위 2개 합 — <b>전원</b> 한 곳만 체크 가능</span></div>
+          <div class="help-step"><span class="n">3</span><span class="tx">차례인 사람만: 흰색+색깔 1개 조합으로 추가 체크</span></div>
+          <div class="help-step"><span class="n">4</span><span class="tx">체크는 항상 오른쪽으로만, 지나간 숫자는 불가</span></div>
+          <div class="help-step"><span class="n">5</span><span class="tx">내 차례에 둘 다 못 하면 벌점 1개(-5점)</span></div>
+          <div class="help-step" style="border-bottom:none"><span class="n">6</span><span class="tx">5칸 이상 체크해야 마지막 숫자 체크 가능 → 즉시 그 줄 잠금(모두에게 공용으로 잠김)</span></div>
+        </div>
+
+        <div class="help-intro">줄 2개가 잠기거나, 누군가 벌점 4개가 되면 게임이 종료돼요.</div>
+
+        <div class="help-score-table">
+          체크 개수별 점수: 1개=1점 · 2개=3점 · 3개=6점 · 4개=10점 · 5개=15점 · 6개=21점 · 7개=28점 · 8개=36점 · 9개=45점 · 10개=55점 · 11개=66점
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 랭킹 -->
+  <div id="screen-ranking" class="screen">
+    <div class="sub-layout" style="display:flex;flex-direction:column;height:100%">
+      <div class="sub-header">
+        <div class="sub-back" data-back="screen-main">←</div>
+        <div class="sub-title">랭킹</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:16px;flex:1;min-height:0">
+        <div class="rank-tabs">
+          <div class="rank-tab active" id="tab-rank-single">싱글</div>
+          <div class="rank-tab" id="tab-rank-multi">멀티</div>
+        </div>
+        <div class="rank-list" id="rank-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 관리자 모달 -->
+  <div id="modal-admin-login" class="modal">
+    <div class="modal-box">
+      <h3>관리자 로그인</h3>
+      <input id="input-admin-password" class="field-input" type="password" placeholder="비밀번호">
+      <div id="admin-login-error" class="err-msg"></div>
+      <button id="btn-admin-login-submit" class="btn-neon">확인</button>
+      <div class="btn-outline" id="btn-admin-login-cancel">취소</div>
+    </div>
+  </div>
+
+  <div id="modal-admin-users" class="modal">
+    <div class="modal-box" style="max-height:80vh;overflow-y:auto">
+      <h3>유저 관리</h3>
+      <div style="display:flex;gap:6px">
+        <input id="input-new-usercode" class="field-input" style="padding:8px 10px;font-size:12px" placeholder="코드">
+        <input id="input-new-username" class="field-input" style="padding:8px 10px;font-size:12px" placeholder="이름">
+      </div>
+      <button id="btn-admin-add-user" class="btn-outline">추가</button>
+      <div id="admin-user-list"></div>
+      <div class="btn-outline" id="btn-admin-users-close">닫기</div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
